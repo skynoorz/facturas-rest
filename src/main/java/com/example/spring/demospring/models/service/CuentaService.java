@@ -13,7 +13,8 @@ public class CuentaService {
     @Autowired
     ICuentaDao cuentaDao;
 
-    public Cuenta findByContrato(String contrato) {
-        return this.cuentaDao.findByContrato(contrato);
+    public Cuenta findByContratoAndNroCuenta(String contrato, String nroCuenta) {
+        return this.cuentaDao.findByContratoAndNroCuenta(contrato, nroCuenta);
     }
+
 }
