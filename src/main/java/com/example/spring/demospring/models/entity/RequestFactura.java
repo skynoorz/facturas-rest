@@ -3,6 +3,7 @@ package com.example.spring.demospring.models.entity;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
@@ -14,7 +15,7 @@ public class RequestFactura {
     @NotNull(message = "Nro de contrato no debe ser vacio")
     private String contrato;
 
-    @Size(min = 2, max = 2, message = "El estado solo debe tener dos caracteres")
     @NotNull
+    @Pattern(regexp="^(AC|PE)$",message="Estado inválido")
     private String estado;
 }
