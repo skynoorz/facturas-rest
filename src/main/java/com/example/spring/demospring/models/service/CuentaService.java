@@ -7,23 +7,21 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.util.List;
-
 @Service
 @Slf4j
 public class CuentaService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Cuenta findByCyC(String contrato, String nroCuenta) throws SQLException {
+    public Cuenta findByCyC(String contrato, String nroCuenta) {
+        String query = "SELECT * FROM CUENTA WHERE CONTRATO=? AND NRO_CUENTA=?";
+        Cuenta cuenta = (Cuenta) jdbcTemplate.queryForObject(
+                query,
+                new Object[]{contrato, nroCuenta},
+                new BeanPropertyRowMapper(Cuenta.class));
 
-        String sql = "SELECT * FROM Students";
-        List<Cuenta> cuentas = jdbcTemplate.query(sql,
-                BeanPropertyRowMapper.newInstance(Cuenta.class));
-
-        cuentas.forEach(System.out :: println);
-        return new Cuenta();
+        log.info("Retornando cuentas...");
+        return cuenta;
     }
 
 }
