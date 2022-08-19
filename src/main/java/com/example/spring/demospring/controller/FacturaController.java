@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,10 +35,11 @@ public class FacturaController {
         }
         Map<String, Object> response = new HashMap<>();
         try {
-            Cuenta cuenta = cuentaService.findByCyC(payload.getContrato(), payload.getNro_cuenta());
-            response.put("cuenta", cuenta);
+            List<Cuenta> cuentas = cuentaService.findByContratoAndCuenta(payload.getContrato(), payload.getNro_cuenta());
+            response.put("cuentas", cuentas);
         } catch (Exception e) {
             response.put("mensaje", "No encontrado");
+            log.error("Error al obtener datos: {}", e.getMessage());
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);

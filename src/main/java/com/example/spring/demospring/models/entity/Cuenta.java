@@ -1,16 +1,16 @@
 package com.example.spring.demospring.models.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Cuenta {
 
     @Id
@@ -24,4 +24,18 @@ public class Cuenta {
 
     @OneToMany(mappedBy = "cuenta")
     private List<Factura> facturas;
+
+    public void addFactura(Factura factura) {
+            this.facturas.add(factura);
+    }
+
+    public Cuenta(Long id, String contrato, String nroCuenta, String estado, String nombres, String ci, ArrayList<Factura> facturas) {
+        this.id = id;
+        this.contrato = contrato;
+        this.nroCuenta = nroCuenta;
+        this.estado = estado;
+        this.nombres = nombres;
+        this.ci = ci;
+        this.facturas = facturas;
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.spring.demospring.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Factura {
 
     @Id
@@ -27,4 +30,12 @@ public class Factura {
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Cuenta cuenta;
+
+    public Factura(Long id, Date fechaEmision, Boolean estado, String nroFactura, Integer monto) {
+        this.id = id;
+        this.fechaEmision = fechaEmision;
+        this.estado = estado;
+        this.nroFactura = nroFactura;
+        this.monto = monto;
+    }
 }
